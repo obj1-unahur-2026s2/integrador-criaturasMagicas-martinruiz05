@@ -1,7 +1,7 @@
 class Criaturas {
   const poderMagico
   const astucia
-  const rolEnElParque
+  var rolEnElParque
   method poderOfensivo(){
     return (poderMagico * 10) + rolEnElParque.extraDePoder()
   }
@@ -14,6 +14,24 @@ method esExtraordinaria() {
 }
 method poderMagico(){
   return poderMagico
+}
+
+method cambiarRol(nuevaMascota){
+  if(rolEnElParque == Guardian and nuevaMascota.edad() == 1 and not nuevaMascota.tieneCuerno()){
+    rolEnElParque = new Domadores()
+    rolEnElParque.agregarMascota(nuevaMascota)
+  }
+  else{
+    if(rolEnElParque == Hechicero){
+      rolEnElParque == Guardian
+    }
+    else{
+      if(nuevaMascota.tieneCuerno()){
+        rolEnElParque == Hechicero
+      }
+      else raise Exception("Se cancela el ritual")
+    }
+  }
 }
 
 }
@@ -45,6 +63,9 @@ class Duendes inherits Criaturas{
 
 class Domadores {
   const mascotas = []
+  method agregarMascota(mascota){
+    mascotas.add(mascota)
+  }
   method mascotasConCuerno(){
     return mascotas.filter({m=>m.tieneCuerno()})
   }
